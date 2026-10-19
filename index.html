@@ -1,121 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="theme-color" content="#08070d">
-<title>STARBOUND — Prototype 0.1</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#08070d">
+<title>STARBOUND — Prototype 0.2</title><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="apple-touch-icon" href="starbound-icon.svg">
 <style>
-:root{--red:#ff344f;--pink:#ff6578;--bg:#08070d;--panel:rgba(16,13,24,.88);--line:rgba(255,68,91,.38)}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:#f8f4f7;font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}
-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-#vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 28%,rgba(0,0,0,.62) 100%)}
-.hud{position:absolute;inset:0;pointer-events:none;padding:14px;display:flex;flex-direction:column;justify-content:space-between}
-.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.brand{font-size:18px;font-weight:900;letter-spacing:.19em;text-shadow:0 0 16px #ff344f}
-.sub{font-size:10px;letter-spacing:.2em;color:#c9aeb8;margin-top:2px}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;box-shadow:0 0 20px #ff26351a;backdrop-filter:blur(9px)}
-.stats{font-size:11px;line-height:1.8;color:#e7dce1;text-align:right}.stats b{color:#ff7182}
-.mission{max-width:230px;font-size:11px;line-height:1.5}.mission strong{display:block;color:#ff7182;letter-spacing:.13em;font-size:10px;margin-bottom:4px}
-.bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
-.hint{font-size:10px;color:#bbaab2;max-width:180px;line-height:1.5}
-.actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end;pointer-events:auto;max-width:58%}
-button{background:#1c111a;color:#fff;border:1px solid #ff435a99;border-radius:9px;padding:10px 12px;font-weight:750;font-size:11px;letter-spacing:.04em;box-shadow:0 0 14px #ff263522}
-button:active{background:#5b1425;transform:scale(.97)}
-#toast{position:absolute;left:50%;top:25%;transform:translate(-50%,-50%);background:#170c15ed;border:1px solid #ff536b;border-radius:10px;padding:12px 16px;font-size:12px;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center;max-width:85%}
-#center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:22px;color:#ff7c8b;text-shadow:0 0 12px #ff344f;pointer-events:none;opacity:.65}
-#touch{position:absolute;left:14px;bottom:78px;display:grid;grid-template-columns:42px 42px 42px;grid-template-rows:42px 42px 42px;gap:4px;pointer-events:auto}
-#touch button{padding:0;font-size:16px;background:#100d17b8}
-#touch .up{grid-column:2;grid-row:1}#touch .left{grid-column:1;grid-row:2}#touch .down{grid-column:2;grid-row:2}#touch .right{grid-column:3;grid-row:2}
-#touch .boost{grid-column:2;grid-row:3;font-size:10px}
-#modal{position:absolute;inset:0;background:#05040bdc;display:none;align-items:center;justify-content:center;padding:18px;pointer-events:auto}
-.modalbox{width:min(440px,100%);max-height:85vh;overflow:auto;background:#100c17;border:1px solid #ff344f88;border-radius:16px;padding:20px;box-shadow:0 0 45px #ff25352a}
-.modalbox h2{margin:0 0 8px;color:#ff6578;letter-spacing:.12em}.modalbox p,.modalbox li{font-size:13px;line-height:1.6;color:#dfd2d9}.modalbox button{margin-top:10px}
-@media(min-width:760px){.hud{padding:22px}.brand{font-size:22px}#touch{left:22px;bottom:95px}.mission{max-width:280px}.actions{max-width:65%}}
-</style>
-</head>
-<body>
-<canvas id="game"></canvas><div id="vignette"></div>
-<div id="center">+</div>
-<div class="hud">
- <div class="top">
-  <div><div class="brand">STARBOUND</div><div class="sub">OPEN-SPACE PROTOTYPE // 0.1</div></div>
-  <div class="panel stats">HULL <b id="hull">100%</b><br>ENERGY <b id="energy">100%</b><br>CRYSTALS <b id="crystals">0</b><br>SECTOR <b id="sector">01</b></div>
- </div>
- <div class="top" style="margin-top:12px">
-  <div class="panel mission"><strong>ACTIVE MISSION</strong><span id="mission">Scan the crimson planet. Fly close and press SCAN.</span></div>
- </div>
- <div class="bottom">
-  <div class="hint">DRAG / use arrows to steer<br>Touch a planet to explore it</div>
-  <div class="actions">
-   <button id="scan">SCAN</button><button id="land">LAND / EXPLORE</button><button id="map">STAR MAP</button><button id="save">SAVE</button><button id="help">HELP</button>
-  </div>
- </div>
-</div>
-<div id="touch">
- <button class="up" data-dir="up">▲</button><button class="left" data-dir="left">◀</button><button class="down" data-dir="down">▼</button><button class="right" data-dir="right">▶</button><button class="boost" data-dir="boost">BOOST</button>
-</div>
-<div id="toast"></div>
-<div id="modal"><div class="modalbox" id="modalbox"></div></div>
+:root{--red:#ff344f;--bg:#08070d}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:#fff;font-family:system-ui,Arial,sans-serif;touch-action:none}canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.hud{position:absolute;inset:0;pointer-events:none;padding:12px;display:flex;flex-direction:column;justify-content:space-between}.top,.bottom{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.brand{font-weight:900;letter-spacing:.18em;font-size:20px;text-shadow:0 0 18px var(--red)}.sub{font-size:9px;letter-spacing:.15em;color:#c7b5bd}.panel{background:#100d17e8;border:1px solid #ff344f88;border-radius:12px;padding:9px 11px;backdrop-filter:blur(8px);box-shadow:0 0 20px #ff344f18}.stats{text-align:right;font-size:11px;line-height:1.8}.stats b{color:#ff7182}.mission{font-size:11px;max-width:230px;line-height:1.4}.mission b{display:block;color:#ff7182;letter-spacing:.12em;margin-bottom:4px}.bottom{align-items:flex-end}.hint{font-size:10px;color:#c6b4bd;line-height:1.5;max-width:145px}.actions{pointer-events:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:62%}button{border:1px solid #ff536caa;border-radius:10px;background:#170e19;color:#fff;padding:10px 11px;font-size:11px;font-weight:800;box-shadow:0 0 12px #ff344f20;touch-action:manipulation}button:active{background:#651b2d;transform:scale(.97)}#pad{position:absolute;left:12px;bottom:85px;display:grid;grid-template-columns:42px 42px 42px;grid-template-rows:42px 42px 42px;gap:4px;pointer-events:auto}#pad button{padding:0;font-size:16px;background:#130d1be8}#up{grid-column:2;grid-row:1}#left{grid-column:1;grid-row:2}#down{grid-column:2;grid-row:2}#right{grid-column:3;grid-row:2}#boost{grid-column:2;grid-row:3;font-size:10px}#toast{position:absolute;top:24%;left:50%;transform:translateX(-50%);background:#170d18;border:1px solid var(--red);border-radius:10px;padding:10px 13px;font-size:12px;display:none;max-width:85%;text-align:center}.centerhint{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:18px;color:#ff8292;opacity:.8;pointer-events:none}@media(min-width:700px){.hud{padding:20px}.brand{font-size:24px}#pad{left:20px;bottom:100px}}
+</style></head><body>
+<canvas id="space"></canvas><div class="centerhint">✦</div><div class="toast" id="toast"></div>
+<div class="hud"><div class="top"><div><div class="brand">STARBOUND</div><div class="sub">OPEN-SPACE PROTOTYPE // 0.2</div></div><div class="panel stats">HULL <b>100%</b><br>ENERGY <b id="energy">100%</b><br>CRYSTALS <b id="crystals">0</b><br>SECTOR <b id="sector">01</b></div></div>
+<div class="top"><div class="panel mission"><b>ACTIVE MISSION</b><span id="mission">Find the crimson planet. The ship is at the center of the screen.</span></div></div>
+<div class="bottom"><div class="hint">Hold arrows to fly<br>Hold BOOST to accelerate<br>Fly close to a planet and SCAN</div><div class="actions"><button id="scan">SCAN</button><button id="land">LAND / EXPLORE</button><button id="map">STAR MAP</button><button id="save">SAVE</button></div></div></div>
+<div id="pad"><button id="up" aria-label="thrust">▲</button><button id="left" aria-label="turn left">◀</button><button id="down" aria-label="reverse">▼</button><button id="right" aria-label="turn right">▶</button><button id="boost">BOOST</button></div>
 <script>
-(()=>{
-const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
-let W=innerWidth,H=innerHeight,dpr=Math.min(devicePixelRatio||1,2);
-function resize(){W=innerWidth;H=innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener('resize',resize);resize();
-const rand=(a,b)=>a+Math.random()*(b-a);
-let stars=Array.from({length:180},()=>({x:Math.random(),y:Math.random(),z:rand(.25,1),r:rand(.4,1.6)}));
-let ship={x:0,y:0,vx:0,vy:0,angle:0};let crystals=0,energy=100,hull=100,scanned=new Set(),landed=null,boosting=false;
-const planets=[
- {id:'crimson',name:'CRIMSON-7',x:320,y:-120,r:58,color:'#a9233f',glow:'#ff244b',desc:'A rust-red world with strange energy signatures.',resource:3},
- {id:'veil',name:'THE VEIL',x:-380,y:190,r:83,color:'#4d2b67',glow:'#a65dff',desc:'A violet gas giant wrapped in glowing dust.',resource:2},
- {id:'frost',name:'FROSTLINE',x:620,y:360,r:43,color:'#497f9e',glow:'#67d9ff',desc:'An icy moon with crystal deposits.',resource:5},
- {id:'ember',name:'EMBER-IX',x:-720,y:-340,r:66,color:'#9c4b23',glow:'#ff873b',desc:'A scorched planet with abandoned signal towers.',resource:4}
-];
-let beacons=[{x:120,y:260,name:'RELAY 01',done:false},{x:-510,y:-70,name:'RELAY 02',done:false}];
-let camera={x:0,y:0};
-function worldToScreen(x,y){return {x:W/2+(x-camera.x),y:H/2+(y-camera.y)}}
-function toast(s){const t=document.getElementById('toast');t.textContent=s;t.style.opacity=1;clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.style.opacity=0,2100)}
-function updateUI(){document.getElementById('hull').textContent=Math.round(hull)+'%';document.getElementById('energy').textContent=Math.round(energy)+'%';document.getElementById('crystals').textContent=crystals;document.getElementById('sector').textContent=String(1+Math.floor(Math.hypot(ship.x,ship.y)/1000)).padStart(2,'0')}
-function drawPlanet(p){let s=worldToScreen(p.x,p.y);if(s.x<-150||s.x>W+150||s.y<-150||s.y>H+150)return;
- let g=ctx.createRadialGradient(s.x,s.y,p.r*.3,s.x,s.y,p.r*1.8);g.addColorStop(0,p.glow+'66');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,p.r*1.8,0,Math.PI*2);ctx.fill();
- let pg=ctx.createRadialGradient(s.x-p.r*.35,s.y-p.r*.35,2,s.x,s.y,p.r);pg.addColorStop(0,p.color+'');pg.addColorStop(.75,p.color);pg.addColorStop(1,'#090810');ctx.fillStyle=pg;ctx.beginPath();ctx.arc(s.x,s.y,p.r,0,Math.PI*2);ctx.fill();
- ctx.strokeStyle=p.glow+'99';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(s.x,s.y,p.r*1.3,p.r*.27,-.25,0,Math.PI*2);ctx.stroke();
- ctx.font='10px system-ui';ctx.textAlign='center';ctx.fillStyle='#f8dce3';ctx.fillText(p.name,s.x,s.y+p.r+17);
-}
-function drawShip(){let s=worldToScreen(ship.x,ship.y);ctx.save();ctx.translate(s.x,s.y);ctx.rotate(ship.angle);
- ctx.shadowBlur=18;ctx.shadowColor='#ff304f';ctx.fillStyle=boosting?'#ff8a9a':'#ff405a';
- ctx.beginPath();ctx.moveTo(19,0);ctx.lineTo(-11,-9);ctx.lineTo(-6,0);ctx.lineTo(-11,9);ctx.closePath();ctx.fill();
- ctx.fillStyle='#fff0f4';ctx.beginPath();ctx.moveTo(7,0);ctx.lineTo(-7,-3);ctx.lineTo(-4,0);ctx.lineTo(-7,3);ctx.closePath();ctx.fill();
- if(boosting){ctx.fillStyle='#ff934a';ctx.beginPath();ctx.moveTo(-8,-4);ctx.lineTo(-24,0);ctx.lineTo(-8,4);ctx.fill()}
- ctx.restore();
-}
-function draw(){ctx.clearRect(0,0,W,H);let bg=ctx.createRadialGradient(W*.5,H*.5,0,W*.5,H*.5,Math.max(W,H)*.8);bg.addColorStop(0,'#15101d');bg.addColorStop(1,'#05050a');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
- for(const st of stars){let x=((st.x*W-ship.x*st.z*.18)%W+W)%W,y=((st.y*H-ship.y*st.z*.18)%H+H)%H;ctx.globalAlpha=.25+st.z*.7;ctx.fillStyle=st.z>.8?'#ff8393':'#c8c4e6';ctx.fillRect(x,y,st.r,st.r)}ctx.globalAlpha=1;
- planets.forEach(drawPlanet);
- for(const b of beacons){let s=worldToScreen(b.x,b.y);ctx.fillStyle=b.done?'#62ffbd':'#ff405a';ctx.shadowBlur=14;ctx.shadowColor=ctx.fillStyle;ctx.beginPath();ctx.arc(s.x,s.y,4,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0;ctx.font='10px system-ui';ctx.fillStyle='#ddd';ctx.fillText(b.done?'RELAY ONLINE':b.name,s.x,s.y-10)}
- drawShip();
- if(landed){ctx.fillStyle='#09060eea';ctx.fillRect(0,0,W,H);ctx.fillStyle='#ff6578';ctx.textAlign='center';ctx.font='900 22px system-ui';ctx.fillText(landed.name,W/2,H/2-48);ctx.fillStyle='#eee';ctx.font='13px system-ui';ctx.fillText('SURFACE EXPEDITION',W/2,H/2-22);ctx.fillText(landed.desc,W/2,H/2+5);ctx.fillStyle='#a99aa5';ctx.fillText('Search for crystals and activate the beacon.',W/2,H/2+29);ctx.fillStyle='#ff344f';ctx.fillRect(W/2-82,H/2+48,164,38);ctx.fillStyle='#fff';ctx.font='bold 12px system-ui';ctx.fillText('COLLECT RESOURCES',W/2,H/2+72);ctx.fillStyle='#eee';ctx.font='11px system-ui';ctx.fillText('Tap the button, or tap LAND / EXPLORE again to return',W/2,H/2+111)}
- requestAnimationFrame(draw)}
-draw();
-let keys={};addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(e.key.toLowerCase()))e.preventDefault()});addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
-function steer(dir){if(dir==='up'||dir==='w'){ship.vx+=Math.cos(ship.angle)*.55;ship.vy+=Math.sin(ship.angle)*.55}else if(dir==='down'||dir==='s'){ship.vx-=Math.cos(ship.angle)*.35;ship.vy-=Math.sin(ship.angle)*.35}else if(dir==='left'||dir==='a')ship.angle-=.16;else if(dir==='right'||dir==='d')ship.angle+=.16}
-function tick(){if(!landed){if(keys.arrowleft||keys.a)steer('left');if(keys.arrowright||keys.d)steer('right');if(keys.arrowup||keys.w)steer('up');if(keys.arrowdown||keys.s)steer('down');if(keys[' '])boosting=true;else boosting=false;
- if(boosting&&energy>0){ship.vx+=Math.cos(ship.angle)*.22;ship.vy+=Math.sin(ship.angle)*.22;energy=Math.max(0,energy-.13)}else energy=Math.min(100,energy+.035);
- ship.x+=ship.vx;ship.y+=ship.vy;ship.vx*=.986;ship.vy*=.986;
- camera.x+=(ship.x-camera.x)*.06;camera.y+=(ship.y-camera.y)*.06;
- }else boosting=false;updateUI();requestAnimationFrame(tick)}tick();
-document.querySelectorAll('#touch button').forEach(btn=>{const d=btn.dataset.dir;const start=e=>{e.preventDefault();if(d==='boost'){boosting=true;keys[' ']=true}else steer(({up:'up',down:'down',left:'left',right:'right'})[d]||d)};btn.addEventListener('pointerdown',start);btn.addEventListener('pointerup',()=>{if(d==='boost'){boosting=false;keys[' ']=false}});btn.addEventListener('pointerleave',()=>{if(d==='boost'){boosting=false;keys[' ']=false}})});
-let drag=null;canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});canvas.addEventListener('pointermove',e=>{if(!drag||landed)return;let dx=e.clientX-drag.x,dy=e.clientY-drag.y;ship.angle=Math.atan2(dy,dx);ship.vx+=dx*.008;ship.vy+=dy*.008;drag={x:e.clientX,y:e.clientY}});canvas.addEventListener('pointerup',()=>drag=null);
-function nearestPlanet(){return planets.map(p=>({...p,d:Math.hypot(p.x-ship.x,p.y-ship.y)})).sort((a,b)=>a.d-b.d)[0]}
-document.getElementById('scan').onclick=()=>{if(landed){toast('Return to orbit before scanning.');return}let p=nearestPlanet();if(p.d>190){toast('No planet in scan range. Fly closer to '+p.name+'.');return}if(scanned.has(p.id)){toast(p.name+' already scanned. Data logged.');return}scanned.add(p.id);energy=Math.max(0,energy-8);toast('SCAN COMPLETE: '+p.name+' — '+p.desc);document.getElementById('mission').textContent='Planet scanned! Land and collect crystals, then find a relay beacon.';updateUI()};
-document.getElementById('land').onclick=()=>{if(landed){landed=null;toast('Returned to orbit.');return}let p=nearestPlanet();if(p.d>p.r+65){toast('Too far away. Fly close to a planet first.');return}landed=p;toast('Landing sequence initiated: '+p.name)};
-canvas.addEventListener('click',e=>{if(landed){if(e.clientY>H/2+40&&e.clientY<H/2+95){crystals+=landed.resource;energy=Math.min(100,energy+12);if(!scanned.has(landed.id))scanned.add(landed.id);toast('Collected '+landed.resource+' crystals on '+landed.name+'!');document.getElementById('mission').textContent='Resources collected. Find and activate a relay beacon.';updateUI()}return}});
-document.getElementById('map').onclick=()=>{showModal('<h2>STAR MAP</h2><p>Your current sector: <b>'+document.getElementById('sector').textContent+'</b></p><ul>'+planets.map(p=>'<li><b>'+p.name+'</b> — '+Math.round(Math.hypot(p.x-ship.x,p.y-ship.y))+' units away '+(scanned.has(p.id)?'✓ SCANNED':'— UNEXPLORED')+'</li>').join('')+'</ul><p>Red dots are relay beacons. Fly near one to activate it.</p><button onclick="document.getElementById(\'modal\').style.display=\'none\'">CLOSE MAP</button>')};
-document.getElementById('help').onclick=()=>showModal('<h2>FLIGHT MANUAL</h2><p><b>Desktop:</b> WASD or arrow keys to steer/thrust. Hold Space to boost.</p><p><b>Mobile:</b> use the on-screen arrows. Hold BOOST to accelerate. Drag the space view to steer and move.</p><p><b>Explore:</b> fly close to a planet, press SCAN, then LAND / EXPLORE. Tap COLLECT RESOURCES on the surface.</p><p><b>Save:</b> SAVE stores your current progress in this browser on this device.</p><p><b>Prototype note:</b> multiplayer is not connected yet; this is an early local-play test build.</p><button onclick="document.getElementById(\'modal\').style.display=\'none\'">GOT IT</button>');
-function showModal(html){document.getElementById('modalbox').innerHTML=html;document.getElementById('modal').style.display='flex'}
-document.getElementById('save').onclick=()=>{try{localStorage.setItem('starbound-save',JSON.stringify({ship,crystals,energy,hull,scanned:[...scanned]}));toast('Progress saved on this device.')}catch(e){toast('Save unavailable in this browser.')}};
-try{let s=JSON.parse(localStorage.getItem('starbound-save')||'null');if(s){Object.assign(ship,s.ship||{});crystals=s.crystals||0;energy=s.energy??100;hull=s.hull??100;(s.scanned||[]).forEach(x=>scanned.add(x));document.getElementById('mission').textContent='Saved flight restored. Keep exploring the sector.'}}catch(e){}
+(()=>{'use strict';
+const canvas=document.getElementById('space'),ctx=canvas.getContext('2d');let W=innerWidth,H=innerHeight,dpr=1;function resize(){W=innerWidth;H=innerHeight;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.floor(W*dpr);canvas.height=Math.floor(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener('resize',resize);resize();
+const stars=Array.from({length:230},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.5+.4,a:Math.random()*.7+.2}));
+const planets=[{name:'CRIMSON-7',x:300,y:-100,r:47,c:'#a9233f',glow:'#ff244b',resource:3,scanned:false},{name:'THE VEIL',x:-330,y:170,r:66,c:'#4d2b67',glow:'#a65dff',resource:2,scanned:false},{name:'FROSTLINE',x:520,y:300,r:35,c:'#497f9e',glow:'#67d9ff',resource:5,scanned:false},{name:'EMBER-IX',x:-620,y:-300,r:54,c:'#9c4b23',glow:'#ff873b',resource:4,scanned:false}];
+const ship={x:0,y:0,vx:0,vy:0,angle:-.2};let cam={x:0,y:0},energy=100,crystals=0,landed=null;const held={};let last=performance.now();
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>el.style.display='none',2100)}function nearest(){return planets.map(p=>({...p,d:Math.hypot(p.x-ship.x,p.y-ship.y)})).sort((a,b)=>a.d-b.d)[0]}function screen(x,y){return{x:W/2+x-cam.x,y:H/2+y-cam.y}}
+function drawPlanet(p){const s=screen(p.x,p.y);if(s.x<-120||s.x>W+120||s.y<-120||s.y>H+120)return;let g=ctx.createRadialGradient(s.x,s.y,p.r*.2,s.x,s.y,p.r*1.8);g.addColorStop(0,p.glow+'88');g.addColorStop(1,'#08070d00');ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,p.r*1.8,0,Math.PI*2);ctx.fill();let q=ctx.createRadialGradient(s.x-p.r*.35,s.y-p.r*.35,1,s.x,s.y,p.r);q.addColorStop(0,p.c);q.addColorStop(.8,p.c);q.addColorStop(1,'#07060b');ctx.fillStyle=q;ctx.beginPath();ctx.arc(s.x,s.y,p.r,0,Math.PI*2);ctx.fill();ctx.strokeStyle=p.glow;ctx.globalAlpha=.75;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(s.x,s.y,p.r*1.3,p.r*.28,-.22,0,Math.PI*2);ctx.stroke();ctx.globalAlpha=1;ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.fillStyle='#f7dce2';ctx.fillText(p.name,s.x,s.y+p.r+16)}
+function drawShip(){const s=screen(ship.x,ship.y);ctx.save();ctx.translate(s.x,s.y);ctx.rotate(ship.angle);ctx.shadowBlur=24;ctx.shadowColor='#ff2347';ctx.fillStyle='#ff344f';ctx.beginPath();ctx.moveTo(25,0);ctx.lineTo(-13,-12);ctx.lineTo(-7,0);ctx.lineTo(-13,12);ctx.closePath();ctx.fill();ctx.shadowBlur=0;ctx.fillStyle='#fff5f7';ctx.beginPath();ctx.moveTo(11,0);ctx.lineTo(-5,-4);ctx.lineTo(-2,0);ctx.lineTo(-5,4);ctx.closePath();ctx.fill();ctx.fillStyle='#ff9a53';ctx.beginPath();ctx.moveTo(-8,-5);ctx.lineTo(held.boost?-35:-17,0);ctx.lineTo(-8,5);ctx.closePath();ctx.fill();ctx.restore();ctx.strokeStyle='#ff536c55';ctx.beginPath();ctx.arc(s.x,s.y,32,0,Math.PI*2);ctx.stroke()}
+function frame(now){const dt=Math.min((now-last)/16.67,2);last=now;ctx.clearRect(0,0,W,H);const bg=ctx.createRadialGradient(W*.5,H*.5,0,W*.5,H*.5,Math.max(W,H)*.8);bg.addColorStop(0,'#17101e');bg.addColorStop(1,'#05050a');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);for(const st of stars){const x=((st.x*W-ship.x*.12)%W+W)%W,y=((st.y*H-ship.y*.12)%H+H)%H;ctx.globalAlpha=st.a;ctx.fillStyle='#e9dce8';ctx.fillRect(x,y,st.r,st.r)}ctx.globalAlpha=1;planets.forEach(drawPlanet);drawShip();
+if(!landed){if(held.left)ship.angle-=.055*dt;if(held.right)ship.angle+=.055*dt;if(held.up){ship.vx+=Math.cos(ship.angle)*.18*dt;ship.vy+=Math.sin(ship.angle)*.18*dt}if(held.down){ship.vx-=Math.cos(ship.angle)*.12*dt;ship.vy-=Math.sin(ship.angle)*.12*dt}if(held.boost&&energy>0){ship.vx+=Math.cos(ship.angle)*.3*dt;ship.vy+=Math.sin(ship.angle)*.3*dt;energy=Math.max(0,energy-.16*dt)}else energy=Math.min(100,energy+.04*dt);ship.x+=ship.vx*dt;ship.y+=ship.vy*dt;ship.vx*=Math.pow(.985,dt);ship.vy*=Math.pow(.985,dt);cam.x+=(ship.x-cam.x)*.09;cam.y+=(ship.y-cam.y)*.09}document.getElementById('energy').textContent=Math.round(energy)+'%';document.getElementById('crystals').textContent=crystals;document.getElementById('sector').textContent=String(1+Math.floor(Math.hypot(ship.x,ship.y)/1000)).padStart(2,'0');requestAnimationFrame(frame)}requestAnimationFrame(frame);
+function bindHold(id,key){const el=document.getElementById(id);const start=e=>{e.preventDefault();held[key]=true};const end=e=>{e.preventDefault();held[key]=false};el.addEventListener('pointerdown',start);el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);el.addEventListener('pointerleave',end)}bindHold('up','up');bindHold('down','down');bindHold('left','left');bindHold('right','right');bindHold('boost','boost');
+addEventListener('keydown',e=>{const map={arrowup:'up',w:'up',arrowdown:'down',s:'down',arrowleft:'left',a:'left',arrowright:'right',d:'right',' ':'boost'};if(map[e.key.toLowerCase()]){held[map[e.key.toLowerCase()]]=true;e.preventDefault()}});addEventListener('keyup',e=>{const map={arrowup:'up',w:'up',arrowdown:'down',s:'down',arrowleft:'left',a:'left',arrowright:'right',d:'right',' ':'boost'};if(map[e.key.toLowerCase()])held[map[e.key.toLowerCase()]]=false});
+document.getElementById('scan').addEventListener('click',()=>{if(landed){toast('Return to orbit first.');return}const p=nearest();if(p.d>p.r+125){toast('Fly closer to '+p.name+' to scan.');return}if(p.scanned){toast(p.name+' is already scanned.');return}p.scanned=true;energy=Math.max(0,energy-8);document.getElementById('mission').textContent='Scan complete! Land on a nearby planet to collect crystals.';toast('SCAN COMPLETE: '+p.name)});
+document.getElementById('land').addEventListener('click',()=>{if(landed){landed=null;document.getElementById('mission').textContent='Back in orbit. Find another planet to explore.';toast('Returned to orbit.');return}const p=nearest();if(p.d>p.r+65){toast('Fly closer to a planet before landing.');return}landed=p;crystals+=p.resource;energy=Math.min(100,energy+12);p.scanned=true;document.getElementById('mission').textContent='Expedition complete! Collected '+p.resource+' crystals. Tap LAND / EXPLORE to return.';toast('Landed on '+p.name+' — collected '+p.resource+' crystals!')});
+document.getElementById('map').addEventListener('click',()=>toast(planets.map(p=>p.name+': '+Math.round(Math.hypot(p.x-ship.x,p.y-ship.y))+'u').join(' | ')));
+document.getElementById('save').addEventListener('click',()=>{try{localStorage.setItem('starbound-save-v2',JSON.stringify({ship,energy,crystals,scanned:planets.map(p=>p.scanned)}));toast('Progress saved on this device.')}catch(e){toast('Browser save unavailable.')}});try{const s=JSON.parse(localStorage.getItem('starbound-save-v2')||'null');if(s){Object.assign(ship,s.ship||{});energy=s.energy??100;crystals=s.crystals||0;(s.scanned||[]).forEach((v,i)=>{if(planets[i])planets[i].scanned=v})}}catch(e){}
 })();
-</script>
-</body>
-</html>
+</script></body></html>
